@@ -1,9 +1,1 @@
-Webpack with configured ts
-
-Run 
-
-npm i
-
-npm run start
-
-and done...
+Ulam spiral, using ts and canvas
