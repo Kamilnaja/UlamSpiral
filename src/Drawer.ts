@@ -38,26 +38,19 @@ class Drawer {
                 this.squareSide++;
                 i++
             } else {
-                // faza 1 jedno w lewo
-                if (this.squareSide % 2 === 0) {
-                    this.x = 23;
-                    this.y = 23;
-                } else {
-                    this.x = -23;
-                    this.y = -23;
-                }
-                // raz w lewo lub prawo
+                this.changeDirection();
+                // phase 1, go one left or right
                 this.drawOne(i, directionY + this.y, directionX);
                 i++;
                 directionY = directionY + this.y;
-                // faza 2 2 w dół lub w górę
+                // phase 2 go down or up
                 for (let k = 0; k < this.squareSide - 1; k++) {
 
                     this.drawOne(i, directionY, directionX + this.x);
                     directionX = directionX + this.x;
                     i++;
                 }
-                // faza 3 w prawo lub lewo
+                // phase 3 go left or right
                 for (let j = 0; j < this.squareSide - 1; j++) {
                     this.drawOne(i, directionY - this.x, directionX);
                     directionY = directionY - this.x;
@@ -67,6 +60,17 @@ class Drawer {
                 this.squareSide++;
             }
 
+        }
+    }
+
+    private changeDirection() {
+        if (this.squareSide % 2 === 0) {
+            this.x = 23;
+            this.y = 23;
+        }
+        else {
+            this.x = -23;
+            this.y = -23;
         }
     }
 }
