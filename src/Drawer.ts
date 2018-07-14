@@ -13,13 +13,26 @@ class Drawer {
         this.squareSide = 1;
     }
 
-    drawOne(text: number, y: number, x: number) {
-        this.ctx.fillText(text.toString(), y, x);
+    isPrime(num) {
+        for (var i = 2; i < num; i++)
+            if (num % i === 0) return false;
+        return num !== 1;
+    }
+
+    drawOne(numberToDisplay: number, y: number, x: number) {
+        this.ctx.font = '10px monospace bold';
+
+        if (this.isPrime(numberToDisplay)) {
+            this.ctx.fillStyle = 'red';
+        } else {
+            this.ctx.fillStyle = 'lightgrey';
+        }
+        this.ctx.fillText(numberToDisplay.toString(), y, x);
     }
 
     drawNumbers() {
-        let directionX = 150;
-        let directionY = 200;
+        let directionX = 600;
+        let directionY = 800;
 
         for (let i = 1; i <= 1000;) {
             if (this.squareSide === 1) {
@@ -29,11 +42,11 @@ class Drawer {
             } else {
                 // faza 1 jedno w lewo
                 if (this.squareSide % 2 === 0) {
-                    this.x = 30;
-                    this.y = 30;
+                    this.x = 21;
+                    this.y = 21;
                 } else {
-                    this.x = -30;
-                    this.y = -30;
+                    this.x = -21;
+                    this.y = -21;
                 }
                 // raz w lewo lub prawo
                 this.drawOne(i, directionY + this.y, directionX);
@@ -41,9 +54,10 @@ class Drawer {
                 directionY = directionY + this.y;
                 // faza 2 2 w dół lub w górę
                 for (let k = 0; k < this.squareSide - 1; k++) {
+
                     this.drawOne(i, directionY, directionX + this.x);
-                    i++;
                     directionX = directionX + this.x;
+                    i++;
                 }
                 // faza 3 w prawo lub lewo
                 for (let j = 0; j < this.squareSide - 1; j++) {
@@ -53,7 +67,6 @@ class Drawer {
                     i++;
                 }
                 this.squareSide++;
-
             }
 
         }
