@@ -2,14 +2,10 @@ class Drawer {
     private ctx: CanvasRenderingContext2D;
     private x: number;
     private y: number;
-    private ctxWidth: number;
-    private ctxHeight: number;
     private squareSide: number;
 
     constructor(ctx: any) {
         this.ctx = ctx;
-        this.ctxHeight = ctx.canvas.height;
-        this.ctxWidth = ctx.canvas.width;
         this.squareSide = 1;
     }
 
@@ -20,21 +16,23 @@ class Drawer {
     }
 
     drawOne(numberToDisplay: number, y: number, x: number) {
-        this.ctx.font = '10px monospace bold';
+        setTimeout(() => {
+            this.ctx.font = '9px serif';
+            if (this.isPrime(numberToDisplay)) {
+                this.ctx.fillStyle = 'red';
+            } else {
+                this.ctx.fillStyle = 'lightgrey';
+            }
+            this.ctx.fillText(numberToDisplay.toString(), y, x);
 
-        if (this.isPrime(numberToDisplay)) {
-            this.ctx.fillStyle = 'red';
-        } else {
-            this.ctx.fillStyle = 'lightgrey';
-        }
-        this.ctx.fillText(numberToDisplay.toString(), y, x);
+        }, numberToDisplay * 100)
     }
 
     drawNumbers() {
         let directionX = 600;
         let directionY = 800;
 
-        for (let i = 1; i <= 1000;) {
+        for (let i = 1; i <= 10000;) {
             if (this.squareSide === 1) {
                 this.drawOne(i, directionY, directionX);
                 this.squareSide++;
@@ -42,11 +40,11 @@ class Drawer {
             } else {
                 // faza 1 jedno w lewo
                 if (this.squareSide % 2 === 0) {
-                    this.x = 21;
-                    this.y = 21;
+                    this.x = 23;
+                    this.y = 23;
                 } else {
-                    this.x = -21;
-                    this.y = -21;
+                    this.x = -23;
+                    this.y = -23;
                 }
                 // raz w lewo lub prawo
                 this.drawOne(i, directionY + this.y, directionX);
@@ -71,6 +69,6 @@ class Drawer {
 
         }
     }
-
 }
+
 export default Drawer;
